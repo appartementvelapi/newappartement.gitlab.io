@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>La Casa Alegría – Vakantieappartement Los Alcázares</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--sand:#f5f0e8;--warm-white:#faf8f4;--sea:#2d6a7f;--sea-light:#4a8fa6;--sea-deep:#1a4a5c;--terracotta:#c87941;--terracotta-light:#e8a06a;--text:#2a2520;--text-muted:#7a6f65;--border:rgba(45,106,127,0.15);--shadow:0 8px 40px rgba(0,0,0,0.08)}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--text);font-size:16px;line-height:1.7}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 2.5rem;background:rgba(250,248,244,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--sea-deep);letter-spacing:.05em;text-decoration:none;white-space:nowrap}
+.nav-logo span{color:var(--terracotta);font-style:italic}
+.nav-center{display:flex;gap:1.5rem;list-style:none}
+.nav-center a{text-decoration:none;color:var(--text-muted);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500;transition:color .2s}
+.nav-center a:hover{color:var(--sea)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.lang-switcher{display:flex;gap:.3rem}
+.lang-btn{background:none;border:1px solid var(--border);color:var(--text-muted);font-size:.72rem;font-weight:600;letter-spacing:.05em;padding:.25rem .5rem;border-radius:3px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.lang-btn:hover{border-color:var(--sea);color:var(--sea)}
+.lang-btn.active{background:var(--sea);border-color:var(--sea);color:white}
+.nav-cta{background:var(--sea);color:white!important;text-decoration:none;padding:.55rem 1.2rem;border-radius:3px;font-size:.82rem;font-weight:500;letter-spacing:.05em;transition:background .2s;white-space:nowrap}
+.nav-cta:hover{background:var(--sea-deep)}
+#home{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:68px}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem 4rem 5rem}
+.hero-eyebrow{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta);font-weight:500;margin-bottom:1.2rem}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,3.5vw,4rem);font-weight:300;line-height:1.1;color:var(--sea-deep);margin-bottom:1.2rem}
+.hero-title em{font-style:italic;color:var(--terracotta)}
+.hero-desc{font-size:.97rem;color:var(--text-muted);max-width:400px;margin-bottom:2rem;line-height:1.8}
+.hero-stats{display:flex;gap:1.5rem;margin-bottom:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border);flex-wrap:wrap}
+.stat{display:flex;flex-direction:column}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:var(--sea);line-height:1}
+.stat-label{font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-top:.2rem}
+.hero-buttons{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{display:inline-block;background:var(--sea);color:white;text-decoration:none;padding:.85rem 1.8rem;border-radius:3px;font-size:.88rem;font-weight:500;transition:background .2s,transform .2s}
+.btn-primary:hover{background:var(--sea-deep);transform:translateY(-1px)}
+.btn-secondary{display:inline-block;border:1px solid var(--sea);color:var(--sea);text-decoration:none;padding:.85rem 1.8rem;border-radius:3px;font-size:.88rem;font-weight:500;transition:all .2s}
+.btn-secondary:hover{background:var(--sea);color:white;transform:translateY(-1px)}
+.hero-right{position:relative;overflow:hidden;background:var(--sea-deep)}
+.hero-gallery{width:100%;height:100%;display:grid;grid-template-rows:60% 40%;grid-template-columns:1fr 1fr;gap:3px}
+.hero-gallery-main{grid-row:1;grid-column:1 / -1;overflow:hidden}
+.hero-gallery-main img,.hero-gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.hero-gallery-main:hover img,.hero-gallery-thumb:hover img{transform:scale(1.03)}
+.hero-gallery-thumb{overflow:hidden}
+section{padding:5rem 0}
+.container{max-width:1100px;margin:0 auto;padding:0 2.5rem}
+.section-label{font-size:.73rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta);font-weight:500;margin-bottom:.8rem}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,2.8vw,2.6rem);font-weight:300;color:var(--sea-deep);line-height:1.2;margin-bottom:1.2rem}
+.section-title em{font-style:italic;color:var(--terracotta)}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:2.5rem}
+.gallery-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:3px;transition:transform .3s,box-shadow .3s;cursor:pointer}
+.gallery-grid img:hover{transform:scale(1.02);box-shadow:var(--shadow)}
+.gallery-grid img:first-child{grid-column:span 2;aspect-ratio:16/9}
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:3px}
+.lightbox-close{position:absolute;top:1.5rem;right:1.5rem;color:white;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1}
+.lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);color:white;font-size:2rem;cursor:pointer;background:rgba(255,255,255,0.1);border:none;padding:1rem 1.2rem;border-radius:3px;transition:background .2s}
+.lightbox-prev:hover,.lightbox-next:hover{background:rgba(255,255,255,0.2)}
+.lightbox-prev{left:1rem}
+.lightbox-next{right:1rem}
+#appartement{background:var(--sand)}
+.intro-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:3rem}
+.specs-row{display:flex;gap:1.5rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);flex-wrap:wrap}
+.spec{display:flex;flex-direction:column}
+.spec-val{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--sea)}
+.spec-label{font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.feature-card{background:var(--warm-white);padding:2rem;transition:background .2s}
+.feature-card:hover{background:white}
+.feature-icon{width:44px;height:44px;background:rgba(45,106,127,0.08);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.3rem}
+.feature-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--sea-deep);margin-bottom:.4rem}
+.feature-desc{font-size:.85rem;color:var(--text-muted);line-height:1.7}
+#complex{background:var(--warm-white)}
+.complex-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin-top:2rem}
+.complex-item{display:flex;align-items:flex-start;gap:1rem;padding:1.3rem;background:var(--sand);border-radius:4px;border-left:3px solid var(--sea-light)}
+.complex-item-icon{font-size:1.4rem;flex-shrink:0}
+.complex-item-text strong{display:block;color:var(--sea-deep);margin-bottom:.2rem;font-size:.92rem}
+.complex-item-text span{font-size:.82rem;color:var(--text-muted)}
+#faciliteiten{background:var(--sea-deep);color:white}
+.fac-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}
+.fac-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:1.5rem;text-align:center}
+.fac-icon{font-size:2rem;margin-bottom:.6rem}
+.fac-title{font-size:.85rem;color:rgba(255,255,255,0.9);font-weight:500}
+.fac-sub{font-size:.73rem;color:rgba(255,255,255,0.5);margin-top:.3rem}
+#locatie{background:var(--sand)}
+.location-layout{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:start}
+.distances{margin-top:1.2rem}
+.distance-item{display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid var(--border);font-size:.85rem}
+.distance-item:last-child{border-bottom:none}
+.distance-item span:first-child{color:var(--text)}
+.distance-item span:last-child{color:var(--sea);font-weight:500;font-family:'Cormorant Garamond',serif;font-size:.95rem;text-align:right}
+#boeken{background:var(--sea-deep);color:white}
+.booking-layout{display:grid;grid-template-columns:1fr 1.8fr;gap:4rem;align-items:center}
+.booking-info p{color:rgba(255,255,255,0.7);font-size:.95rem;line-height:1.8;margin-bottom:1.5rem}
+.booking-teaser{background:rgba(255,255,255,0.06);border:1px dashed rgba(255,255,255,0.25);border-radius:8px;padding:3rem 2rem;text-align:center;color:rgba(255,255,255,0.7)}
+.booking-teaser-icon{font-size:3rem;margin-bottom:1rem}
+.booking-teaser h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:white;margin-bottom:.8rem;font-weight:300}
+.booking-teaser p{font-size:.9rem;line-height:1.7;margin-bottom:0}
+.booking-teaser-badge{display:inline-block;margin-top:1.5rem;background:var(--terracotta);color:white;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.4rem 1rem;border-radius:20px}
+.booking-checklist{margin-top:1.5rem}
+.booking-checklist div{display:flex;align-items:center;gap:.8rem;color:rgba(255,255,255,0.75);font-size:.85rem;margin-bottom:.8rem}
+#praktisch{background:var(--warm-white)}
+.practical-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2.5rem}
+.practical-card{background:white;border-radius:4px;padding:1.8rem;box-shadow:var(--shadow)}
+.practical-card-header{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.practical-card-icon{font-size:1.4rem;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:rgba(45,106,127,0.08);border-radius:50%;flex-shrink:0}
+.practical-card-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--sea-deep)}
+.practical-list{list-style:none}
+.practical-list li{font-size:.85rem;color:var(--text-muted);padding:.45rem 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:.6rem;line-height:1.5}
+.practical-list li:last-child{border-bottom:none}
+.practical-list li::before{content:'—';color:var(--terracotta);font-size:.8rem;flex-shrink:0;margin-top:.1rem}
+footer{background:var(--text);color:rgba(255,255,255,0.6);padding:2.5rem 0;text-align:center}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:white;margin-bottom:.4rem}
+footer p{font-size:.83rem}
+@media(max-width:960px){
+  nav{padding:.9rem 1.2rem}
+  .nav-center{display:none}
+  #home{grid-template-columns:1fr}
+  .hero-right{min-height:280px}
+  .hero-left{padding:3rem 1.5rem 2rem}
+  .intro-layout,.booking-layout,.location-layout{grid-template-columns:1fr;gap:2rem}
+  .features-grid,.practical-grid{grid-template-columns:1fr}
+  .complex-grid{grid-template-columns:1fr}
+  .fac-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-grid img:first-child{grid-column:span 2}
+  .container{padding:0 1.2rem}
+  section{padding:3.5rem 0}
+}
+@media(max-width:500px){
+  .hero-left{padding:2.5rem 1rem 1.5rem}
+  .gallery-grid{grid-template-columns:1fr}
+  .gallery-grid img:first-child{grid-column:span 1}
+  .lang-btn{padding:.2rem .4rem;font-size:.65rem}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero-eyebrow{animation:fadeUp .5s ease both}
+.hero-title{animation:fadeUp .5s ease .08s both}
+.hero-desc{animation:fadeUp .5s ease .16s both}
+.hero-stats{animation:fadeUp .5s ease .24s both}
+.hero-buttons{animation:fadeUp .5s ease .32s both}
+</style>
+</head>
+<body>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightboxBtn()">✕</button>
+  <button class="lightbox-prev" onclick="lightboxNav(-1)">&#8249;</button>
+  <img id="lightbox-img" src="" alt="">
+  <button class="lightbox-next" onclick="lightboxNav(1)">&#8250;</button>
+</div>
+
+<nav>
+  <a href="#home" class="nav-logo">La Casa <span>Alegría</span></a>
+  <ul class="nav-center">
+    <li><a href="#appartement" data-i18n="nav_apt">Appartement</a></li>
+    <li><a href="#complex" data-i18n="nav_complex">Complex</a></li>
+    <li><a href="#faciliteiten" data-i18n="nav_fac">Faciliteiten</a></li>
+    <li><a href="#locatie" data-i18n="nav_loc">Locatie</a></li>
+    <li><a href="#praktisch" data-i18n="nav_prac">Praktisch</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('nl')">NL</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+    <a href="#boeken" class="nav-cta" data-i18n="nav_book">Boeken</a>
+  </div>
+</nav>
+
+<section id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow" data-i18n="hero_eyebrow">Vakantieappartement · Los Alcázares · Mar Menor · Spanje</p>
+    <h1 class="hero-title" data-i18n="hero_title">Zon, zee &amp; vreugde<br>aan de <em>Mar Menor</em></h1>
+    <p class="hero-desc" data-i18n="hero_desc">Geniet van een heerlijke vakantie in La Casa Alegría — ons ruime, lichte appartement met drie slaapkamers en een zonnig terras, op loopafstand van het strand en direct naast Roda Golf Resort.</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num" data-i18n="stat_apt">Ruim</span><span class="stat-label" data-i18n="stat_apt_label">modern appartement</span></div>
+      <div class="stat"><span class="stat-num" data-i18n="stat_terrace">Groot</span><span class="stat-label" data-i18n="stat_terrace_label">terras met loungehoek</span></div>
+      <div class="stat"><span class="stat-num">3</span><span class="stat-label" data-i18n="stat_rooms">Slaapkamers</span></div>
+      <div class="stat"><span class="stat-num">6</span><span class="stat-label" data-i18n="stat_persons">Personen</span></div>
+    </div>
+    <div class="hero-buttons">
+      <a href="#boeken" class="btn-primary" data-i18n="btn_avail">Beschikbaarheid bekijken</a>
+      <a href="#appartement" class="btn-secondary" data-i18n="btn_more">Meer info</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-gallery">
+      <div class="hero-gallery-main"><img src="pictures/drone-overzicht-complex.jpg" alt="La Casa Alegría overzicht"></div>
+      <div class="hero-gallery-thumb"><img src="pictures/terras-met-uitzicht-1.jpg" alt="Terras"></div>
+      <div class="hero-gallery-thumb"><img src="pictures/drone-zwembad-en-binnenplein.jpg" alt="Zwembad"></div>
+    </div>
+  </div>
+</section>
+
+<section id="appartement">
+  <div class="container">
+    <div class="intro-layout">
+      <div>
+        <p class="section-label" data-i18n="apt_label">Het appartement</p>
+        <h2 class="section-title" data-i18n="apt_title">Licht, ruim &amp;<br><em>volledig ingericht</em></h2>
+        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1rem" data-i18n="apt_desc1">La Casa Alegría biedt alles voor een zorgeloze vakantie. Het lichte appartement beschikt over een moderne open keuken, ruime woonkamer met eetgedeelte, drie slaapkamers, twee badkamers en een zonnig terras.</p>
+        <p style="color:var(--text-muted);line-height:1.8" data-i18n="apt_desc2">Alles is met zorg ingericht en volledig uitgerust — van beddengoed tot koffiezetapparaat. Zo kun jij je alleen bezighouden met genieten.</p>
+        <div class="specs-row">
+          <div class="spec"><span class="spec-val">3</span><span class="spec-label" data-i18n="spec_rooms">Slaapkamers</span></div>
+          <div class="spec"><span class="spec-val">2</span><span class="spec-label" data-i18n="spec_bath">Badkamers</span></div>
+          <div class="spec"><span class="spec-val">6</span><span class="spec-label" data-i18n="spec_persons">Personen</span></div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;border-radius:4px;overflow:hidden;height:380px">
+        <img src="pictures/woonkamer-overzicht.jpg" alt="Woonkamer" style="width:100%;height:100%;object-fit:cover;grid-row:span 2;cursor:pointer" onclick="openLightbox(this.src)">
+        <img src="pictures/keuken-overzicht.jpg" alt="Keuken" style="width:100%;height:100%;object-fit:cover;cursor:pointer" onclick="openLightbox(this.src)">
+        <img src="pictures/slaapkamer-1-overzichtsfoto-met-badkamer-1.jpg" alt="Slaapkamer" style="width:100%;height:100%;object-fit:cover;cursor:pointer" onclick="openLightbox(this.src)">
+      </div>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">🛏️</div><div class="feature-title" data-i18n="feat1_title">3 Slaapkamers</div><p class="feature-desc" data-i18n="feat1_desc">Comfortabele slaapkamers met goede bedden en ruime kledingkasten. Beddengoed inbegrepen.</p></div>
+      <div class="feature-card"><div class="feature-icon">🍳</div><div class="feature-title" data-i18n="feat2_title">Volledig uitgeruste keuken</div><p class="feature-desc" data-i18n="feat2_desc">Vaatwasser, oven, magnetron, koffiezetapparaat en alle keukengerei aanwezig.</p></div>
+      <div class="feature-card"><div class="feature-icon">🌞</div><div class="feature-title" data-i18n="feat3_title">Groot zonnig terras</div><p class="feature-desc" data-i18n="feat3_desc">Ruim terras met loungehoek en zonnebedden — perfect voor ontbijten in de ochtendzon of een aperitief bij zonsondergang.</p></div>
+      <div class="feature-card"><div class="feature-icon">❄️</div><div class="feature-title" data-i18n="feat4_title">Airconditioning</div><p class="feature-desc" data-i18n="feat4_desc">Warm en koud — altijd de juiste temperatuur, ook tijdens de heetste zomerdagen.</p></div>
+      <div class="feature-card"><div class="feature-icon">📶</div><div class="feature-title" data-i18n="feat5_title">Supersnelle fiber WiFi</div><p class="feature-desc" data-i18n="feat5_desc">Glasvezelinternet door het hele appartement. Streamen, videobellen en thuiswerken zonder vertraging.</p></div>
+      <div class="feature-card"><div class="feature-icon">🅿️</div><div class="feature-title" data-i18n="feat6_title">Privé parkeerplaats</div><p class="feature-desc" data-i18n="feat6_desc">Eigen ondergrondse parkeerplaats inbegrepen. Geen gedoe met parkeren.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="galerij" style="background:var(--sand);padding-top:0">
+  <div class="container">
+    <p class="section-label" data-i18n="gal_label">Foto's</p>
+    <h2 class="section-title" data-i18n="gal_title">Ontdek <em>La Casa Alegría</em></h2>
+    <div class="gallery-grid" id="galleryGrid">
+      <img src="pictures/woonkamer-overzicht2.jpg" alt="Woonkamer" onclick="openLightboxIdx(0)">
+      <img src="pictures/woonkamer-zitgedeelte.jpg" alt="Zitgedeelte" onclick="openLightboxIdx(1)">
+      <img src="pictures/woonkamer-eetgedeelte.jpg" alt="Eetgedeelte" onclick="openLightboxIdx(2)">
+      <img src="pictures/woonkamer-TV.jpg" alt="TV hoek" onclick="openLightboxIdx(3)">
+      <img src="pictures/keuken-apparatuur.jpg" alt="Keuken" onclick="openLightboxIdx(4)">
+      <img src="pictures/slaapkamer-1-overzichtsfoto-met-badkamer-1.jpg" alt="Slaapkamer 1" onclick="openLightboxIdx(5)">
+      <img src="pictures/slaapkamer-1-foto-2.jpg" alt="Slaapkamer 1b" onclick="openLightboxIdx(6)">
+      <img src="pictures/slaapkamer-1-close-up-foto-van-badkamer-1.jpg" alt="Badkamer 1" onclick="openLightboxIdx(7)">
+      <img src="pictures/slaapkamer-2.jpg" alt="Slaapkamer 2" onclick="openLightboxIdx(8)">
+      <img src="pictures/slaapkamer-2-overzicht-met-uitzicht-naar-buiten.jpg" alt="Slaapkamer 2 uitzicht" onclick="openLightboxIdx(9)">
+      <img src="pictures/slaapkamer-3-nr1.jpg" alt="Slaapkamer 3" onclick="openLightboxIdx(10)">
+      <img src="pictures/slaapkamer-3-nr2.jpg" alt="Slaapkamer 3b" onclick="openLightboxIdx(11)">
+      <img src="pictures/badkamer-2.jpg" alt="Badkamer 2" onclick="openLightboxIdx(12)">
+      <img src="pictures/terras-met-uitzicht-1.jpg" alt="Terras 1" onclick="openLightboxIdx(13)">
+      <img src="pictures/terras-met-uitzicht-2.jpg" alt="Terras 2" onclick="openLightboxIdx(14)">
+      <img src="pictures/drone-foto-van-terras.jpg" alt="Terras drone" onclick="openLightboxIdx(15)">
+      <img src="pictures/drone-foto-van-terras-iets-dichterbij.jpg" alt="Terras drone close" onclick="openLightboxIdx(16)">
+      <img src="pictures/drone-zwembad-en-binnenplein.jpg" alt="Zwembad" onclick="openLightboxIdx(17)">
+      <img src="pictures/speeltuin.jpg" alt="Speeltuin" onclick="openLightboxIdx(18)">
+    </div>
+  </div>
+</section>
+
+<section id="complex">
+  <div class="container">
+    <p class="section-label" data-i18n="cpx_label">Het complex</p>
+    <h2 class="section-title" data-i18n="cpx_title">Velapi II –<br><em>modern &amp; groen</em></h2>
+    <p style="color:var(--text-muted);max-width:600px;line-height:1.8;margin-bottom:1.5rem" data-i18n="cpx_desc">Velapi II is een modern nieuwbouwcomplex in Los Alcázares, op loopafstand van het strand en direct naast Roda Golf Resort aan de Mar Menor. Het complex bestaat uit 78 appartementen verdeeld over drie gebouwen, omringd door weelderige groene zones.</p>
+    <div class="complex-grid">
+      <div class="complex-item"><div class="complex-item-icon">🏊</div><div class="complex-item-text"><strong data-i18n="cpx1_title">Gemeenschappelijk zwembad</strong><span data-i18n="cpx1_desc">Groot buitenzwembad voor alle gasten, inclusief kinderbad</span></div></div>
+      <div class="complex-item"><div class="complex-item-icon">💦</div><div class="complex-item-text"><strong data-i18n="cpx2_title">Whirlpool</strong><span data-i18n="cpx2_desc">Bubbelbad bij het zwembad</span></div></div>
+      <div class="complex-item"><div class="complex-item-icon">🌿</div><div class="complex-item-text"><strong data-i18n="cpx3_title">Grote groene zone</strong><span data-i18n="cpx3_desc">Verzorgde tuinen en groene ruimtes rondom het complex</span></div></div>
+      <div class="complex-item"><div class="complex-item-icon">🛝</div><div class="complex-item-text"><strong data-i18n="cpx4_title">Speeltuin</strong><span data-i18n="cpx4_desc">Kindvriendelijke speeltuin op het terrein</span></div></div>
+      <div class="complex-item"><div class="complex-item-icon">🛗</div><div class="complex-item-text"><strong data-i18n="cpx5_title">Lift</strong><span data-i18n="cpx5_desc">Lift aanwezig, ook bereikbaar vanuit de parkeergarage</span></div></div>
+      <div class="complex-item"><div class="complex-item-icon">🔒</div><div class="complex-item-text"><strong data-i18n="cpx6_title">Beveiligd terrein</strong><span data-i18n="cpx6_desc">Afgesloten complex met eigen toegang voor bewoners en gasten</span></div></div>
+      <div class="complex-item"><div class="complex-item-icon">🛒</div><div class="complex-item-text"><strong data-i18n="cpx7_title">Supermarkten om de hoek</strong><span data-i18n="cpx7_desc">Consum &amp; Aldi op 700m, Lidl op 800m, Mercadona op 2km — boodschappen doen was nog nooit zo makkelijk</span></div></div>
+      <div class="complex-item"><div class="complex-item-icon">⛳</div><div class="complex-item-text"><strong data-i18n="cpx8_title">Direct naast Roda Golf Resort</strong><span data-i18n="cpx8_desc">En talloze andere golfbanen in de directe omgeving</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="faciliteiten">
+  <div class="container">
+    <p class="section-label" style="color:var(--terracotta-light)" data-i18n="fac_label">Populaire faciliteiten</p>
+    <h2 class="section-title" style="color:white" data-i18n="fac_title">Wat gasten het<br><em>meest waarderen</em></h2>
+    <div class="fac-grid">
+      <div class="fac-card"><div class="fac-icon">🏊</div><div class="fac-title" data-i18n="fac1">Buitenzwembad</div><div class="fac-sub" data-i18n="fac1s">inclusief kinderbad</div></div>
+      <div class="fac-card"><div class="fac-icon">💦</div><div class="fac-title" data-i18n="fac2">Whirlpool</div><div class="fac-sub" data-i18n="fac2s">bubbelbad bij het zwembad</div></div>
+      <div class="fac-card"><div class="fac-icon">📶</div><div class="fac-title" data-i18n="fac3">Fiber WiFi</div><div class="fac-sub" data-i18n="fac3s">supersnelle glasvezel</div></div>
+      <div class="fac-card"><div class="fac-icon">❄️</div><div class="fac-title" data-i18n="fac4">Airconditioning</div><div class="fac-sub" data-i18n="fac4s">warm &amp; koud</div></div>
+      <div class="fac-card"><div class="fac-icon">🅿️</div><div class="fac-title" data-i18n="fac5">Privé parking</div><div class="fac-sub" data-i18n="fac5s">ondergronds, inbegrepen</div></div>
+      <div class="fac-card"><div class="fac-icon">📺</div><div class="fac-title" data-i18n="fac6">Smart TV</div><div class="fac-sub" data-i18n="fac6s">int. kanalen incl. NL</div></div>
+      <div class="fac-card"><div class="fac-icon">🍳</div><div class="fac-title" data-i18n="fac7">Keuken</div><div class="fac-sub" data-i18n="fac7s">volledig uitgerust</div></div>
+      <div class="fac-card"><div class="fac-icon">🛋️</div><div class="fac-title" data-i18n="fac_terrace">Privé terras</div><div class="fac-sub" data-i18n="fac_terraces">groot, met loungehoek &amp; zonnebedden</div></div>
+      <div class="fac-card"><div class="fac-icon">🏠</div><div class="fac-title" data-i18n="fac_modern">Nieuwbouw</div><div class="fac-sub" data-i18n="fac_moderns">ruim &amp; modern ingericht</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="locatie">
+  <div class="container">
+    <div class="location-layout">
+      <div style="border-radius:4px;overflow:hidden;border:1px solid var(--border);height:420px">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3154.199258756376!2d-0.8509291235386033!3d37.76192577198881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6313fc5c54cd5d%3A0xfb628502cba67efb!2sResidencial%20Velapi!5e0!3m2!1snl!2snl!4v1776955422457!5m2!1snl!2snl" width="100%" height="100%" style="border:0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div>
+        <p class="section-label" data-i18n="loc_label">Locatie</p>
+        <h2 class="section-title" data-i18n="loc_title">Los Alcázares<br><em>aan de Mar Menor</em></h2>
+        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1rem" data-i18n="loc_desc">Los Alcázares ligt aan de Mar Menor, de grootste zoutwaterlagune van Europa. Het warme, ondiepe water is ideaal voor gezinnen, kitesurfers en watersportliefhebbers.</p>
+        <div class="distances">
+          <div class="distance-item"><span>🏖️ <span data-i18n="dist1">Playa de los Narejos &amp; Playa Los Alcázares</span></span><span data-i18n="dist1v">± 2 km · ± 15 min. lopen</span></div>
+          <div class="distance-item"><span>⛳ <span data-i18n="dist2">Roda Golf Resort</span></span><span data-i18n="dist2v">direct naast het complex</span></div>
+          <div class="distance-item"><span>⛳ <span data-i18n="dist3">La Manga Club, Serena Golf e.a.</span></span><span data-i18n="dist3v">talloze banen in de regio</span></div>
+          <div class="distance-item"><span>🛒 <span data-i18n="dist4">Consum &amp; Aldi</span></span><span data-i18n="dist4v">700m · ± 8 min. lopen</span></div>
+          <div class="distance-item"><span>🛒 <span data-i18n="dist4b">Lidl</span></span><span data-i18n="dist4bv">800m · ± 10 min. lopen</span></div>
+          <div class="distance-item"><span>✈️ <span data-i18n="dist5">Luchthaven Murcia (MJV)</span></span><span data-i18n="dist5v">± 34 km · ± 30 min.</span></div>
+          <div class="distance-item"><span>✈️ <span data-i18n="dist6">Luchthaven Alicante (ALC)</span></span><span data-i18n="dist6v">± 90 km · &lt; 1 uur</span></div>
+          <div class="distance-item"><span>🏛️ <span data-i18n="dist7">Cartagena (Romeinse havenstad)</span></span><span data-i18n="dist7v">± 30 km · ± 25 min.</span></div>
+          <div class="distance-item"><span>🏙️ <span data-i18n="dist8">Murcia stad</span></span><span data-i18n="dist8v">± 45 km</span></div>
+          <div class="distance-item"><span>⛱️ <span data-i18n="dist9">La Manga del Mar Menor</span></span><span data-i18n="dist9v">± 32 km</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="boeken">
+  <div class="container">
+    <div class="booking-layout">
+      <div class="booking-info">
+        <p class="section-label" style="color:var(--terracotta-light)" data-i18n="book_label">Reserveren</p>
+        <h2 class="section-title" style="color:white" data-i18n="book_title">Binnenkort online<br><em>boekbaar</em></h2>
+        <p data-i18n="book_desc">Onze boekingsmodule is bijna klaar. Binnenkort kun je hier direct beschikbaarheid bekijken en reserveren — zonder tussenkomst van derden.</p>
+        <div class="booking-checklist">
+          <div><span>✅</span><span data-i18n="book_c1">Directe bevestiging</span></div>
+          <div><span>✅</span><span data-i18n="book_c2">Veilig online betalen</span></div>
+          <div><span>✅</span><span data-i18n="book_c3">Geen verborgen kosten</span></div>
+          <div><span>✅</span><span data-i18n="book_c4">Rechtstreeks bij de eigenaar</span></div>
+        </div>
+      </div>
+      <div class="booking-teaser">
+        <div class="booking-teaser-icon">🗓️</div>
+        <h3 data-i18n="teaser_title">Boekingsmodule in aanbouw</h3>
+        <p data-i18n="teaser_desc">We werken aan een eenvoudig boekingssysteem. Kom snel terug — of neem alvast contact met ons op voor beschikbaarheid en prijzen.</p>
+        <span class="booking-teaser-badge" data-i18n="teaser_badge">Binnenkort beschikbaar</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="praktisch">
+  <div class="container">
+    <p class="section-label" data-i18n="prac_label">Praktische informatie</p>
+    <h2 class="section-title" data-i18n="prac_title">Alles wat je moet<br><em>weten</em></h2>
+    <div class="practical-grid">
+      <div class="practical-card">
+        <div class="practical-card-header"><div class="practical-card-icon">🔑</div><div class="practical-card-title" data-i18n="prac1_title">Check-in &amp; check-out</div></div>
+        <ul class="practical-list">
+          <li data-i18n="p1_1">Check-in vanaf 15:00 uur</li>
+          <li data-i18n="p1_2">Check-out voor 10:00 uur</li>
+          <li data-i18n="p1_3">Geef je verwachte aankomsttijd vooraf door</li>
+          <li data-i18n="p1_4">Sleuteloverdracht in overleg met eigenaar</li>
+          <li data-i18n="p1_5">Vroeger inchecken op aanvraag (onder voorbehoud)</li>
+        </ul>
+      </div>
+      <div class="practical-card">
+        <div class="practical-card-header"><div class="practical-card-icon">💶</div><div class="practical-card-title" data-i18n="prac2_title">Kosten &amp; betaling</div></div>
+        <ul class="practical-list">
+          <li data-i18n="p2_1">Schoonmaakkosten worden apart in rekening gebracht</li>
+          <li data-i18n="p2_2">Incheckkosten zijn van toepassing</li>
+          <li data-i18n="p2_3">Waarborgsom van €450 vereist bij aankomst</li>
+          <li data-i18n="p2_4">Borg teruggestort na inspectie (binnen 7 dagen)</li>
+          <li data-i18n="p2_5">Betaling via veilige online boeking</li>
+        </ul>
+      </div>
+      <div class="practical-card">
+        <div class="practical-card-header"><div class="practical-card-icon">📋</div><div class="practical-card-title" data-i18n="prac3_title">Huisregels</div></div>
+        <ul class="practical-list">
+          <li data-i18n="p3_1">Niet roken in het appartement</li>
+          <li data-i18n="p3_2">Geen huisdieren toegestaan</li>
+          <li data-i18n="p3_3">Rustige uren van 00:00 – 08:00</li>
+          <li data-i18n="p3_4">Huurovereenkomst vereist voor aankomst</li>
+          <li data-i18n="p3_5">Geen feesten of grote evenementen</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">La Casa Alegría</div>
+  <p>Los Alcázares · Mar Menor · Murcia, España</p>
+  <p style="margin-top:.8rem;font-size:.78rem;opacity:.45">© 2026 · La Casa Alegría · <span data-i18n="footer_rights">Alle rechten voorbehouden</span></p>
+</footer>
+
+<script>
+const galleryImgs=Array.from(document.querySelectorAll('#galleryGrid img')).map(i=>i.src);
+let currentIdx=0;
+function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden'}
+function openLightboxIdx(idx){currentIdx=idx;openLightbox(galleryImgs[idx])}
+function closeLightboxBtn(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow=''}
+function closeLightbox(e){if(e.target===document.getElementById('lightbox'))closeLightboxBtn()}
+function lightboxNav(dir){currentIdx=(currentIdx+dir+galleryImgs.length)%galleryImgs.length;document.getElementById('lightbox-img').src=galleryImgs[currentIdx]}
+document.addEventListener('keydown',e=>{if(!document.getElementById('lightbox').classList.contains('open'))return;if(e.key==='Escape')closeLightboxBtn();if(e.key==='ArrowRight')lightboxNav(1);if(e.key==='ArrowLeft')lightboxNav(-1)});
+
+const T={
+nl:{nav_apt:'Appartement',nav_complex:'Complex',nav_fac:'Faciliteiten',nav_loc:'Locatie',nav_prac:'Praktisch',nav_book:'Boeken',hero_eyebrow:'Vakantieappartement · Los Alcázares · Mar Menor · Spanje',hero_title:'Zon, zee &amp; vreugde<br>aan de <em>Mar Menor</em>',hero_desc:'Geniet van een heerlijke vakantie in La Casa Alegría — ons ruime, lichte appartement met drie slaapkamers en een zonnig terras, direct naast Roda Golf Resort.',stat_size:'Ruim',stat_size_label:'appartement (88m²)',stat_terrace:'Zonnig terras',stat_rooms:'Slaapkamers',stat_persons:'Personen',btn_avail:'Beschikbaarheid bekijken',btn_more:'Meer info',apt_label:'Het appartement',apt_title:'Licht, ruim &amp;<br><em>volledig ingericht</em>',apt_desc1:'La Casa Alegría biedt alles voor een zorgeloze vakantie. Het lichte appartement beschikt over een moderne open keuken, ruime woonkamer met eetgedeelte, drie slaapkamers, twee badkamers en een zonnig terras.',apt_desc2:'Alles is met zorg ingericht en volledig uitgerust — van beddengoed tot koffiezetapparaat. Zo kun jij je alleen bezighouden met genieten.',spec_living:'Woonoppervlak',spec_terrace:'Terras',spec_rooms:'Slaapkamers',spec_bath:'Badkamers',spec_persons:'Personen',feat1_title:'3 Slaapkamers',feat1_desc:'Comfortabele slaapkamers met goede bedden en ruime kledingkasten. Beddengoed inbegrepen.',feat2_title:'Volledig uitgeruste keuken',feat2_desc:'Vaatwasser, oven, magnetron, koffiezetapparaat en alle keukengerei aanwezig.',feat3_title:'Zonnig terras',feat3_desc:'10m² terras — perfect voor een kop koffie in de ochtend of een glas wijn bij zonsondergang.',feat4_title:'Airconditioning',feat4_desc:'Warm en koud — altijd de juiste temperatuur, ook tijdens de heetste zomerdagen.',feat5_title:'Supersnelle fiber WiFi',feat5_desc:'Glasvezelinternet door het hele appartement. Streamen, videobellen en thuiswerken zonder vertraging.',feat6_title:'Privé parkeerplaats',feat6_desc:'Eigen ondergrondse parkeerplaats inbegrepen. Geen gedoe met parkeren.',gal_label:"Foto's",gal_title:'Ontdek <em>La Casa Alegría</em>',cpx_label:'Het complex',cpx_title:'Velapi II –<br><em>modern &amp; groen</em>',cpx_desc:'Velapi II is een modern nieuwbouwcomplex in Los Narejos, direct naast Roda Golf Resort aan de Mar Menor.',cpx1_title:'Gemeenschappelijk zwembad',cpx1_desc:'Groot buitenzwembad voor alle gasten, inclusief kinderbad',cpx2_title:'Whirlpool',cpx2_desc:'Bubbelbad bij het zwembad',cpx3_title:'Grote groene zone',cpx3_desc:'Verzorgde tuinen en groene ruimtes rondom het complex',cpx4_title:'Speeltuin',cpx4_desc:'Kindvriendelijke speeltuin op het terrein',cpx5_title:'Lift',cpx5_desc:'Lift aanwezig, ook bereikbaar vanuit de parkeergarage',cpx6_title:'Beveiligd terrein',cpx6_desc:'Afgesloten complex met eigen toegang voor bewoners en gasten',cpx7_title:'4 grote supermarkten op loopafstand',cpx7_desc:'Consum, Aldi, Lidl en Mercadona — alle dagelijkse boodschappen binnen handbereik',cpx8_title:'Direct naast Roda Golf Resort',cpx8_desc:'En talloze andere golfbanen in de directe omgeving',fac_label:'Populaire faciliteiten',fac_title:'Wat gasten het<br><em>meest waarderen</em>',fac1:'Buitenzwembad',fac1s:'inclusief kinderbad',fac2:'Whirlpool',fac2s:'bubbelbad bij het zwembad',fac3:'Fiber WiFi',fac3s:'supersnelle glasvezel',fac4:'Airconditioning',fac4s:'warm &amp; koud',fac5:'Privé parking',fac5s:'ondergronds, inbegrepen',fac6:'Smart TV',fac6s:'int. kanalen incl. NL',fac7:'Vaatwasser',fac7s:'volledig uitgerust',fac8:'Speeltuin',fac8s:'op het terrein',loc_label:'Locatie',loc_title:'Los Alcázares<br><em>aan de Mar Menor</em>',loc_desc:'Los Alcázares ligt aan de Mar Menor, de grootste zoutwaterlagune van Europa. Het warme, ondiepe water is ideaal voor gezinnen, kitesurfers en watersportliefhebbers.',dist1:'Las Palmeras Beach',dist1v:'± 18 min. lopen',dist2:'Roda Golf Resort',dist2v:'direct naast het complex',dist3:'La Manga Club, Serena Golf e.a.',dist3v:'talloze banen in de regio',dist4:'Consum, Aldi, Lidl, Mercadona',dist4v:'alle op loopafstand',dist5:'Luchthaven Murcia (MJV)',dist5v:'± 34 km · ± 30 min.',dist6:'Luchthaven Alicante (ALC)',dist6v:'± 90 km · < 1 uur',dist7:'Cartagena (Romeinse havenstad)',dist7v:'± 30 km · ± 25 min.',dist8:'Murcia stad',dist8v:'± 45 km',dist9:'La Manga del Mar Menor',dist9v:'± 32 km',book_label:'Reserveren',book_title:'Binnenkort online<br><em>boekbaar</em>',book_desc:'Onze boekingsmodule is bijna klaar. Binnenkort kun je hier direct beschikbaarheid bekijken en reserveren — zonder tussenkomst van derden.',book_c1:'Directe bevestiging',book_c2:'Veilig online betalen',book_c3:'Geen verborgen kosten',book_c4:'Rechtstreeks bij de eigenaar',teaser_title:'Boekingsmodule in aanbouw',teaser_desc:'We werken aan een eenvoudig boekingssysteem. Kom snel terug — of neem alvast contact met ons op voor beschikbaarheid en prijzen.',teaser_badge:'Binnenkort beschikbaar',prac_label:'Praktische informatie',prac_title:'Alles wat je moet<br><em>weten</em>',prac1_title:'Check-in &amp; check-out',p1_1:'Check-in vanaf 15:00 uur',p1_2:'Check-out voor 10:00 uur',p1_3:'Geef je verwachte aankomsttijd vooraf door',p1_4:'Sleuteloverdracht in overleg met eigenaar',p1_5:'Vroeger inchecken op aanvraag (onder voorbehoud)',prac2_title:'Kosten &amp; betaling',p2_1:'Schoonmaakkosten worden apart in rekening gebracht',p2_2:'Incheckkosten zijn van toepassing',p2_3:'Waarborgsom van €450 vereist bij aankomst',p2_4:'Borg teruggestort na inspectie (binnen 7 dagen)',p2_5:'Betaling via veilige online boeking',prac3_title:'Huisregels',p3_1:'Niet roken in het appartement',p3_2:'Geen huisdieren toegestaan',p3_3:'Rustige uren van 00:00 – 08:00',p3_4:'Huurovereenkomst vereist voor aankomst',p3_5:'Geen feesten of grote evenementen',footer_rights:'Alle rechten voorbehouden'},
+en:{nav_apt:'Apartment',nav_complex:'Complex',nav_fac:'Facilities',nav_loc:'Location',nav_prac:'Info',nav_book:'Book',hero_eyebrow:'Holiday apartment · Los Alcázares · Mar Menor · Spain',hero_title:'Sun, sea &amp; joy<br>on the <em>Mar Menor</em>',hero_desc:'Enjoy a wonderful holiday at La Casa Alegría — our spacious, bright apartment with three bedrooms and a sunny terrace, right next to Roda Golf Resort.',stat_size:'Spacious',stat_size_label:'apartment (88m²)',stat_terrace:'Sunny terrace',stat_rooms:'Bedrooms',stat_persons:'Persons',btn_avail:'Check availability',btn_more:'More info',apt_label:'The apartment',apt_title:'Light, spacious &amp;<br><em>fully equipped</em>',apt_desc1:'La Casa Alegría offers everything for a carefree holiday. The bright apartment features a modern open kitchen, spacious living and dining area, three bedrooms, two bathrooms and a sunny terrace.',apt_desc2:'Everything is thoughtfully furnished and fully equipped — from bed linen to coffee maker. All you need to do is relax and enjoy.',spec_living:'Living area',spec_terrace:'Terrace',spec_rooms:'Bedrooms',spec_bath:'Bathrooms',spec_persons:'Persons',feat1_title:'3 Bedrooms',feat1_desc:'Comfortable bedrooms with good beds and ample wardrobe space. Bed linen included.',feat2_title:'Fully equipped kitchen',feat2_desc:'Dishwasher, oven, microwave, coffee maker and all kitchen utensils provided.',feat3_title:'Sunny terrace',feat3_desc:'10m² terrace — perfect for a morning coffee or a glass of wine at sunset.',feat4_title:'Air conditioning',feat4_desc:'Heating and cooling — always the right temperature, even on the hottest summer days.',feat5_title:'Superfast fibre WiFi',feat5_desc:'Fibre optic internet throughout the apartment. Stream, video call and work without interruption.',feat6_title:'Private parking',feat6_desc:'Dedicated underground parking space included in the price. No hassle with parking.',gal_label:'Photos',gal_title:'Discover <em>La Casa Alegría</em>',cpx_label:'The complex',cpx_title:'Velapi II –<br><em>modern &amp; green</em>',cpx_desc:'Velapi II is a modern new-build complex in Los Narejos, right next to Roda Golf Resort on the Mar Menor.',cpx1_title:'Communal swimming pool',cpx1_desc:"Large outdoor pool for all guests, including children's pool",cpx2_title:'Whirlpool',cpx2_desc:'Bubble bath at the pool',cpx3_title:'Large green zone',cpx3_desc:'Well-maintained gardens and green spaces around the complex',cpx4_title:'Playground',cpx4_desc:'Child-friendly playground on the grounds',cpx5_title:'Lift',cpx5_desc:'Lift available, also accessible from the underground car park',cpx6_title:'Secured grounds',cpx6_desc:'Gated complex with private access for residents and guests',cpx7_title:'4 large supermarkets within walking distance',cpx7_desc:'Consum, Aldi, Lidl and Mercadona — all daily shopping within easy reach',cpx8_title:'Right next to Roda Golf Resort',cpx8_desc:'Plus many other golf courses in the surrounding area',fac_label:'Popular facilities',fac_title:'What guests love<br><em>most</em>',fac1:'Outdoor pool',fac1s:"incl. children's pool",fac2:'Whirlpool',fac2s:'bubble bath at the pool',fac3:'Fibre WiFi',fac3s:'superfast connection',fac4:'Air conditioning',fac4s:'heating &amp; cooling',fac5:'Private parking',fac5s:'underground, included',fac6:'Smart TV',fac6s:'int. channels incl. NL',fac7:'Dishwasher',fac7s:'fully equipped',fac8:'Playground',fac8s:'on the grounds',loc_label:'Location',loc_title:'Los Alcázares<br><em>on the Mar Menor</em>',loc_desc:'Los Alcázares is situated on the Mar Menor, the largest saltwater lagoon in Europe. The warm, shallow water is ideal for families, kitesurfers and water sports enthusiasts.',dist1:'Las Palmeras Beach',dist1v:'± 18 min. walk',dist2:'Roda Golf Resort',dist2v:'right next to the complex',dist3:'La Manga Club, Serena Golf &amp; more',dist3v:'many courses in the region',dist4:'Consum, Aldi, Lidl, Mercadona',dist4v:'all within walking distance',dist5:'Murcia Airport (MJV)',dist5v:'± 34 km · ± 30 min.',dist6:'Alicante Airport (ALC)',dist6v:'± 90 km · < 1 hour',dist7:'Cartagena (Roman port city)',dist7v:'± 30 km · ± 25 min.',dist8:'Murcia city',dist8v:'± 45 km',dist9:'La Manga del Mar Menor',dist9v:'± 32 km',book_label:'Book',book_title:'Online booking<br><em>coming soon</em>',book_desc:"Our booking module is almost ready. Soon you'll be able to check availability and book directly here — no third parties.",book_c1:'Instant confirmation',book_c2:'Secure online payment',book_c3:'No hidden costs',book_c4:'Book directly with the owner',teaser_title:'Booking system under construction',teaser_desc:"We're building an easy booking system. Check back soon — or contact us directly for availability and pricing.",teaser_badge:'Coming soon',prac_label:'Practical info',prac_title:'Everything you need<br><em>to know</em>',prac1_title:'Check-in &amp; check-out',p1_1:'Check-in from 3:00 PM',p1_2:'Check-out before 10:00 AM',p1_3:'Please share your estimated arrival time in advance',p1_4:'Key handover arranged with the owner',p1_5:'Early check-in on request (subject to availability)',prac2_title:'Costs &amp; payment',p2_1:'Cleaning fee charged separately',p2_2:'Check-in fee applies',p2_3:'Security deposit of €450 required on arrival',p2_4:'Deposit returned after inspection (within 7 days)',p2_5:'Payment via secure online booking',prac3_title:'House rules',p3_1:'No smoking inside the apartment',p3_2:'No pets allowed',p3_3:'Quiet hours from midnight to 8:00 AM',p3_4:'Rental agreement required before arrival',p3_5:'No parties or large events',footer_rights:'All rights reserved'},
+fr:{nav_apt:'Appartement',nav_complex:'Résidence',nav_fac:'Équipements',nav_loc:'Localisation',nav_prac:'Infos',nav_book:'Réserver',hero_eyebrow:'Appartement de vacances · Los Alcázares · Mar Menor · Espagne',hero_title:'Soleil, mer &amp; joie<br>sur la <em>Mar Menor</em>',hero_desc:"Profitez de vacances inoubliables à La Casa Alegría — notre appartement spacieux et lumineux avec trois chambres et une terrasse ensoleillée, juste à côté du Roda Golf Resort.",stat_size:'Spacieux',stat_size_label:'appartement (88m²)',stat_terrace:'Terrasse ensoleillée',stat_rooms:'Chambres',stat_persons:'Personnes',btn_avail:'Voir les disponibilités',btn_more:'En savoir plus',apt_label:"L'appartement",apt_title:'Lumineux, spacieux &amp;<br><em>entièrement équipé</em>',apt_desc1:"La Casa Alegría offre tout pour des vacances sans souci. L'appartement lumineux dispose d'une cuisine ouverte moderne, grand salon-salle à manger, trois chambres, deux salles de bain et terrasse ensoleillée.",apt_desc2:"Tout est aménagé avec soin et entièrement équipé — du linge de lit à la cafetière. Il ne vous reste qu'à profiter.",spec_living:'Surface habitable',spec_terrace:'Terrasse',spec_rooms:'Chambres',spec_bath:'Salles de bain',spec_persons:'Personnes',feat1_title:'3 Chambres',feat1_desc:'Chambres confortables avec bons lits et grands placards. Linge de lit inclus.',feat2_title:'Cuisine entièrement équipée',feat2_desc:'Lave-vaisselle, four, micro-ondes, cafetière et toute la batterie de cuisine.',feat3_title:'Terrasse ensoleillée',feat3_desc:"Terrasse de 10m² — parfaite pour un café le matin ou un verre de vin au coucher du soleil.",feat4_title:'Climatisation',feat4_desc:'Chaud et froid — toujours la bonne température, même pendant les journées les plus chaudes.',feat5_title:'WiFi fibre ultra-rapide',feat5_desc:"Internet fibre optique dans tout l'appartement. Streaming, appels vidéo et télétravail sans interruption.",feat6_title:'Parking privé',feat6_desc:"Place de parking souterraine privée incluse dans le prix. Aucun souci pour se garer.",gal_label:'Photos',gal_title:'Découvrez <em>La Casa Alegría</em>',cpx_label:'La résidence',cpx_title:'Velapi II –<br><em>moderne &amp; verdoyante</em>',cpx_desc:'Velapi II est une résidence moderne à Los Narejos, juste à côté du Roda Golf Resort sur la Mar Menor.',cpx1_title:'Piscine commune',cpx1_desc:'Grande piscine extérieure pour tous les hôtes, avec pataugeoire',cpx2_title:'Whirlpool',cpx2_desc:'Bain à bulles au bord de la piscine',cpx3_title:'Grande zone verte',cpx3_desc:'Jardins entretenus et espaces verts autour de la résidence',cpx4_title:'Aire de jeux',cpx4_desc:'Aire de jeux pour enfants sur le terrain',cpx5_title:'Ascenseur',cpx5_desc:'Ascenseur disponible, accessible depuis le parking souterrain',cpx6_title:'Domaine sécurisé',cpx6_desc:'Résidence fermée avec accès privé pour résidents et hôtes',cpx7_title:'4 grands supermarchés à pied',cpx7_desc:'Consum, Aldi, Lidl et Mercadona — toutes les courses à portée de main',cpx8_title:'Juste à côté du Roda Golf Resort',cpx8_desc:'Et de nombreux autres terrains de golf dans la région',fac_label:'Équipements populaires',fac_title:'Ce que les hôtes<br><em>apprécient le plus</em>',fac1:'Piscine extérieure',fac1s:'avec pataugeoire',fac2:'Whirlpool',fac2s:'bain à bulles',fac3:'WiFi fibre',fac3s:'connexion ultra-rapide',fac4:'Climatisation',fac4s:'chaud &amp; froid',fac5:'Parking privé',fac5s:'souterrain, inclus',fac6:'Smart TV',fac6s:'chaînes int. incl. NL',fac7:'Lave-vaisselle',fac7s:'entièrement équipée',fac8:'Aire de jeux',fac8s:'sur le terrain',loc_label:'Localisation',loc_title:'Los Alcázares<br><em>sur la Mar Menor</em>',loc_desc:"Los Alcázares est situé sur la Mar Menor, le plus grand lagon d'eau salée d'Europe. L'eau chaude et peu profonde est idéale pour les familles, les kitesurfeurs et les amateurs de sports nautiques.",dist1:'Plage Las Palmeras',dist1v:'± 18 min. à pied',dist2:'Roda Golf Resort',dist2v:'juste à côté de la résidence',dist3:'La Manga Club, Serena Golf &amp; autres',dist3v:'nombreux parcours dans la région',dist4:'Consum, Aldi, Lidl, Mercadona',dist4v:'tous à pied',dist5:'Aéroport Murcie (MJV)',dist5v:'± 34 km · ± 30 min.',dist6:'Aéroport Alicante (ALC)',dist6v:'± 90 km · < 1 heure',dist7:'Carthagène (cité portuaire romaine)',dist7v:'± 30 km · ± 25 min.',dist8:'Ville de Murcie',dist8v:'± 45 km',dist9:'La Manga del Mar Menor',dist9v:'± 32 km',book_label:'Réserver',book_title:'Réservation en ligne<br><em>bientôt disponible</em>',book_desc:'Notre module de réservations est presque prêt. Bientôt vous pourrez consulter les disponibilités et réserver directement ici — sans intermédiaire.',book_c1:'Confirmation immédiate',book_c2:'Paiement en ligne sécurisé',book_c3:'Pas de frais cachés',book_c4:'Réservez directement auprès du propriétaire',teaser_title:'Système de réservation en construction',teaser_desc:'Nous construisons un système de réservation simple. Revenez bientôt — ou contactez-nous directement pour les disponibilités et les tarifs.',teaser_badge:'Bientôt disponible',prac_label:'Informations pratiques',prac_title:'Tout ce que vous devez<br><em>savoir</em>',prac1_title:'Arrivée &amp; départ',p1_1:'Arrivée à partir de 15h00',p1_2:'Départ avant 10h00',p1_3:"Merci de communiquer votre heure d'arrivée à l'avance",p1_4:'Remise des clés en accord avec le propriétaire',p1_5:'Arrivée anticipée sur demande (sous réserve)',prac2_title:'Coûts &amp; paiement',p2_1:'Frais de ménage facturés séparément',p2_2:"Frais d'enregistrement applicables",p2_3:"Dépôt de garantie de 450 € requis à l'arrivée",p2_4:'Caution remboursée après inspection (dans les 7 jours)',p2_5:'Paiement via réservation en ligne sécurisée',prac3_title:'Règlement intérieur',p3_1:"Non-fumeur dans l'appartement",p3_2:'Animaux non acceptés',p3_3:'Heures calmes de minuit à 8h00',p3_4:"Contrat de location requis avant l'arrivée",p3_5:'Fêtes et grands événements interdits',footer_rights:'Tous droits réservés'},
+es:{nav_apt:'Apartamento',nav_complex:'Complejo',nav_fac:'Instalaciones',nav_loc:'Ubicación',nav_prac:'Info',nav_book:'Reservar',hero_eyebrow:'Apartamento vacacional · Los Alcázares · Mar Menor · España',hero_title:'Sol, mar &amp; alegría<br>en el <em>Mar Menor</em>',hero_desc:'Disfruta de unas vacaciones perfectas en La Casa Alegría — nuestro amplio y luminoso apartamento con tres dormitorios y terraza soleada, justo al lado del Roda Golf Resort.',stat_size:'Amplio',stat_size_label:'apartamento (88m²)',stat_terrace:'Terraza soleada',stat_rooms:'Dormitorios',stat_persons:'Personas',btn_avail:'Ver disponibilidad',btn_more:'Más información',apt_label:'El apartamento',apt_title:'Luminoso, amplio &amp;<br><em>totalmente equipado</em>',apt_desc1:'La Casa Alegría ofrece todo lo necesario para unas vacaciones sin preocupaciones. El luminoso apartamento cuenta con cocina abierta moderna, amplio salón-comedor, tres dormitorios, dos baños y terraza soleada.',apt_desc2:'Todo está decorado con cuidado y totalmente equipado — desde la ropa de cama hasta la cafetera. Solo tienes que relajarte y disfrutar.',spec_living:'Superficie',spec_terrace:'Terraza',spec_rooms:'Dormitorios',spec_bath:'Baños',spec_persons:'Personas',feat1_title:'3 Dormitorios',feat1_desc:'Dormitorios confortables con buenas camas y amplios armarios. Ropa de cama incluida.',feat2_title:'Cocina totalmente equipada',feat2_desc:'Lavavajillas, horno, microondas, cafetera y todos los utensilios de cocina.',feat3_title:'Terraza soleada',feat3_desc:'Terraza de 10m² — perfecta para un café por la mañana o una copa de vino al atardecer.',feat4_title:'Aire acondicionado',feat4_desc:'Calor y frío — siempre la temperatura perfecta, incluso en los días más calurosos.',feat5_title:'WiFi fibra ultra-rápido',feat5_desc:'Internet de fibra óptica en todo el apartamento. Streaming, videollamadas y teletrabajo sin interrupciones.',feat6_title:'Plaza de garaje privada',feat6_desc:'Plaza de aparcamiento subterráneo privada incluida en el precio. Sin preocupaciones por aparcar.',gal_label:'Fotos',gal_title:'Descubre <em>La Casa Alegría</em>',cpx_label:'El complejo',cpx_title:'Velapi II –<br><em>moderno &amp; verde</em>',cpx_desc:'Velapi II es un moderno complejo de nueva construcción en Los Narejos, justo al lado del Roda Golf Resort en el Mar Menor.',cpx1_title:'Piscina comunitaria',cpx1_desc:'Gran piscina exterior para todos los huéspedes, con piscina infantil',cpx2_title:'Whirlpool',cpx2_desc:'Baño de burbujas junto a la piscina',cpx3_title:'Amplia zona verde',cpx3_desc:'Jardines cuidados y zonas verdes alrededor del complejo',cpx4_title:'Parque infantil',cpx4_desc:'Parque infantil en los jardines del complejo',cpx5_title:'Ascensor',cpx5_desc:'Ascensor disponible, accesible también desde el aparcamiento',cpx6_title:'Recinto cerrado',cpx6_desc:'Complejo con acceso privado para residentes y huéspedes',cpx7_title:'4 grandes supermercados a pie',cpx7_desc:'Consum, Aldi, Lidl y Mercadona — toda la compra diaria a tu alcance',cpx8_title:'Justo al lado del Roda Golf Resort',cpx8_desc:'Y numerosos otros campos de golf en la zona',fac_label:'Instalaciones populares',fac_title:'Lo que más valoran<br><em>los huéspedes</em>',fac1:'Piscina exterior',fac1s:'con piscina infantil',fac2:'Whirlpool',fac2s:'baño de burbujas',fac3:'WiFi fibra',fac3s:'conexión ultra-rápida',fac4:'Aire acondicionado',fac4s:'frío &amp; calor',fac5:'Garaje privado',fac5s:'subterráneo, incluido',fac6:'Smart TV',fac6s:'canales int. incl. NL',fac7:'Lavavajillas',fac7s:'totalmente equipado',fac8:'Parque infantil',fac8s:'en el recinto',loc_label:'Ubicación',loc_title:'Los Alcázares<br><em>en el Mar Menor</em>',loc_desc:'Los Alcázares está situado en el Mar Menor, la laguna de agua salada más grande de Europa. El agua cálida y poco profunda es ideal para familias, kitesurfistas y amantes de los deportes acuáticos.',dist1:'Playa Las Palmeras',dist1v:'± 18 min. a pie',dist2:'Roda Golf Resort',dist2v:'justo al lado del complejo',dist3:'La Manga Club, Serena Golf y otros',dist3v:'numerosos campos en la región',dist4:'Consum, Aldi, Lidl, Mercadona',dist4v:'todos a pie',dist5:'Aeropuerto Murcia (MJV)',dist5v:'± 34 km · ± 30 min.',dist6:'Aeropuerto Alicante (ALC)',dist6v:'± 90 km · < 1 hora',dist7:'Cartagena (ciudad portuaria romana)',dist7v:'± 30 km · ± 25 min.',dist8:'Ciudad de Murcia',dist8v:'± 45 km',dist9:'La Manga del Mar Menor',dist9v:'± 32 km',book_label:'Reservar',book_title:'Reserva online<br><em>próximamente</em>',book_desc:'Nuestro módulo de reservas estará listo muy pronto. En breve podrás consultar disponibilidad y reservar directamente aquí.',book_c1:'Confirmación inmediata',book_c2:'Pago online seguro',book_c3:'Sin costes ocultos',book_c4:'Reserva directamente con el propietario',teaser_title:'Sistema de reservas en construcción',teaser_desc:'Estamos creando un sistema de reservas sencillo. Vuelve pronto — o contáctanos directamente para disponibilidad y precios.',teaser_badge:'Próximamente disponible',prac_label:'Información práctica',prac_title:'Todo lo que necesitas<br><em>saber</em>',prac1_title:'Entrada &amp; salida',p1_1:'Entrada a partir de las 15:00 h',p1_2:'Salida antes de las 10:00 h',p1_3:'Por favor, comunica tu hora de llegada con antelación',p1_4:'Entrega de llaves acordada con el propietario',p1_5:'Entrada anticipada posible bajo petición',prac2_title:'Costes &amp; pago',p2_1:'Gastos de limpieza facturados aparte',p2_2:'Se aplican gastos de check-in',p2_3:'Depósito de garantía de 450 € requerido a la llegada',p2_4:'Depósito devuelto tras inspección (en 7 días)',p2_5:'Pago mediante reserva online segura',prac3_title:'Normas de la casa',p3_1:'Prohibido fumar en el apartamento',p3_2:'No se admiten mascotas',p3_3:'Horario de silencio de 00:00 a 08:00 h',p3_4:'Contrato de alquiler requerido antes de la llegada',p3_5:'No se permiten fiestas ni grandes eventos',footer_rights:'Todos los derechos reservados'}
+};
+
+function setLang(lang){
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase()===lang));
+  document.documentElement.lang=lang;
+  const t=T[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(t[k]!==undefined)el.innerHTML=t[k]});
+  const titles={nl:'La Casa Alegría – Vakantieappartement Los Alcázares',en:'La Casa Alegría – Holiday Apartment Los Alcázares',fr:'La Casa Alegría – Appartement de Vacances Los Alcázares',es:'La Casa Alegría – Apartamento Vacacional Los Alcázares'};
+  document.title=titles[lang];
+}
+</script>
+</body>
+</html>

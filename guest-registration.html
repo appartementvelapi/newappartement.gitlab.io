@@ -262,6 +262,11 @@ function createGuestCard(i) {
         <input type="text" name="Guest ${i} - Document number" placeholder="e.g. AB1234567" required>
         <span class="error-msg">Required</span>
       </div>
+      <div class="field-group" id="fg-docsupport-${i}">
+        <label>Document support number</label>
+        <input type="text" name="Guest ${i} - Document support number" placeholder="e.g. AAA123456">
+        <p style="font-size:.7rem;color:var(--text-muted);margin-top:.3rem">Required for Spanish DNI/NIF and NIE holders only. Found on the back of your ID card (also called IDESP). Leave blank if you use a passport.</p>
+      </div>
       <div class="field-group" id="fg-docuit-${i}">
         <label>Document issue date *</label>
         <input type="date" name="Guest ${i} - Document issue date" required>
@@ -271,6 +276,23 @@ function createGuestCard(i) {
         <label>Home address *</label>
         <input type="text" name="Guest ${i} - Address" placeholder="Street, number, postcode, city, country" required>
         <span class="error-msg">Required</span>
+      </div>
+      <div class="field-group full" id="fg-kinship-${i}">
+        <label>Relationship to another guest</label>
+        <select name="Guest ${i} - Kinship">
+          <option value="">Not applicable</option>
+          <option value="Spouse">Spouse</option>
+          <option value="Partner">Partner</option>
+          <option value="Child">Child</option>
+          <option value="Parent">Parent</option>
+          <option value="Sibling">Sibling (brother/sister)</option>
+          <option value="Grandparent">Grandparent</option>
+          <option value="Grandchild">Grandchild</option>
+          <option value="Guardian">Guardian</option>
+          <option value="Other family">Other family</option>
+          <option value="Other">Other</option>
+        </select>
+        <p style="font-size:.7rem;color:var(--text-muted);margin-top:.3rem">Required for minors travelling with a parent or guardian. Optional for adults — please indicate if you are travelling as a couple or family.</p>
       </div>
     </div>
   `;

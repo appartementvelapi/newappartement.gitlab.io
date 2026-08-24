@@ -85,6 +85,8 @@ footer{background:var(--sea-deep);color:rgba(255,255,255,.4);text-align:center;p
 
   <div class="info-box">
     <strong>Why is this required?</strong> Under Spanish law (Royal Decree 933/2021), landlords are obliged to report the identity details of all guests aged 14 and over to the Spanish authorities via SES.HOSPEDAJES within 24 hours of arrival. Please submit your details <strong>at least 48 hours before arrival</strong>. Valid documents: passport or EU identity card (driving licences are not accepted).
+    <br><br>
+    <strong>Note on booker vs. guests:</strong> The person filling in this form (the booker) is not automatically counted as a guest. If you are also staying at the apartment, please tick the box below and include your own details as Guest 1.
   </div>
 
   <form id="regForm" novalidate>
@@ -107,6 +109,13 @@ footer{background:var(--sea-deep);color:rgba(255,255,255,.4);text-align:center;p
           <label>Your phone number (including country code)</label>
           <input type="tel" id="phone" name="Lead guest phone" placeholder="e.g. +31 6 12345678" required>
           <span class="error-msg">Required</span>
+        </div>
+        <div class="field-group" id="fg-bookerguest" style="grid-column:1/-1">
+          <label style="display:flex;align-items:center;gap:.5rem;text-transform:none;letter-spacing:0;font-size:.88rem;color:var(--text);font-weight:400;cursor:pointer">
+            <input type="checkbox" id="bookerIsGuest" name="Booker is also a guest" value="Yes" style="width:auto;margin:0">
+            I am also one of the guests staying at the apartment
+          </label>
+          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.3rem">If ticked, please include your own details as Guest 1 below.</p>
         </div>
         <div class="field-group" id="fg-aankomst">
           <label>Arrival date</label>
@@ -226,6 +235,16 @@ function createGuestCard(i) {
         <input type="text" name="Guest ${i} - Nationality" placeholder="e.g. Dutch" required>
         <span class="error-msg">Required</span>
       </div>
+      <div class="field-group" id="fg-gender-${i}">
+        <label>Gender *</label>
+        <select name="Guest ${i} - Gender" required>
+          <option value="">Select...</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <span class="error-msg">Required</span>
+      </div>
       <div class="field-group" id="fg-doctype-${i}">
         <label>Document type *</label>
         <select name="Guest ${i} - Document type" required>
@@ -278,7 +297,7 @@ function validateForm() {
     } else { fg.classList.remove('error'); }
   });
   for (let i = 1; i <= numGuests; i++) {
-    ['naam','geb','nat','doctype','docnr','docuit','adres'].forEach(field => {
+    ['naam','geb','nat','gender','doctype','docnr','docuit','adres'].forEach(field => {
       const fg = document.getElementById(`fg-${field}-${i}`);
       if (!fg) return;
       const input = fg.querySelector('input, select');

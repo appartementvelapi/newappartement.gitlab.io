@@ -262,6 +262,11 @@ function createGuestCard(i) {
         <input type="text" name="Guest ${i} - Document number" placeholder="e.g. AB1234567" required>
         <span class="error-msg">Required</span>
       </div>
+      <div class="field-group" id="fg-docsupport-${i}">
+        <label>Document support number (Spanish DNI/NIE only)</label>
+        <input type="text" name="Guest ${i} - Document support number" placeholder="e.g. AAA123456">
+        <p style="font-size:.7rem;color:var(--text-muted);margin-top:.3rem">Only required if your document is a Spanish DNI/NIF or NIE. Also called <em>número de soporte</em> or <em>IDESP</em>. Found on the back of your ID card. Leave blank for passports and other documents.</p>
+      </div>
       <div class="field-group" id="fg-docuit-${i}">
         <label>Document issue date *</label>
         <input type="date" name="Guest ${i} - Document issue date" required>

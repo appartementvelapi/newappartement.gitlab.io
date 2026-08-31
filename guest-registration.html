@@ -66,6 +66,8 @@ select{cursor:pointer}
 .field-group.error .error-msg{display:block}
 footer{background:var(--sea-deep);color:rgba(255,255,255,.4);text-align:center;padding:1.5rem;font-size:.78rem}
 .footer-logo{font-family:'Cormorant Garamond',serif;color:white;font-size:1rem;margin-bottom:.3rem}
+.date-group{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:.4rem}
+.date-group select{padding:.55rem .4rem}
 </style>
 </head>
 <body>
@@ -191,6 +193,28 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xkoygyqa';
 
 let numGuests = 1;
 
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+function dayOptions(){let s='';for(let d=1;d<=31;d++)s+=`<option value="${String(d).padStart(2,'0')}">${d}</option>`;return s;}
+function monthOptions(){return MONTHS.map((m,i)=>`<option value="${String(i+1).padStart(2,'0')}">${m}</option>`).join('');}
+function dobYearOptions(){const now=new Date().getFullYear();let s='';for(let y=now-14;y>=now-110;y--)s+=`<option value="${y}">${y}</option>`;return s;}
+function docYearOptions(){const now=new Date().getFullYear();let s='';for(let y=now;y>=now-40;y--)s+=`<option value="${y}">${y}</option>`;return s;}
+
+function updateDob(i){
+  const card=document.getElementById(`guest-card-${i}`);
+  const d=card.querySelector('.dob-day').value;
+  const m=card.querySelector('.dob-month').value;
+  const y=card.querySelector('.dob-year').value;
+  card.querySelector('.dob-value').value=(d&&m&&y)?`${y}-${m}-${d}`:'';
+}
+
+function updateDoc(i){
+  const card=document.getElementById(`guest-card-${i}`);
+  const d=card.querySelector('.doc-day').value;
+  const m=card.querySelector('.doc-month').value;
+  const y=card.querySelector('.doc-year').value;
+  card.querySelector('.doc-value').value=(d&&m&&y)?`${y}-${m}-${d}`:'';
+}
+
 function changeGuests(delta) {
   numGuests = Math.max(1, Math.min(6, numGuests + delta));
   document.getElementById('guestCount').textContent = numGuests;
@@ -226,8 +250,22 @@ function createGuestCard(i) {
       </div>
       <div class="field-group" id="fg-geb-${i}">
         <label>Date of birth *</label>
-        <input type="date" name="Guest ${i} - Date of birth" required>
-        <span class="error-msg">Required</span>
+        <div class="date-group">
+          <select class="dob-day" onchange="updateDob(${i})" required>
+            <option value="">Day</option>
+            ${dayOptions()}
+          </select>
+          <select class="dob-month" onchange="updateDob(${i})" required>
+            <option value="">Month</option>
+            ${monthOptions()}
+          </select>
+          <select class="dob-year" onchange="updateDob(${i})" required>
+            <option value="">Year</option>
+            ${dobYearOptions()}
+          </select>
+        </div>
+        <input type="hidden" name="Guest ${i} - Date of birth" class="dob-value">
+        <span class="error-msg">Please select day, month and year</span>
       </div>
       <div class="field-group" id="fg-nat-${i}">
         <label>Nationality *</label>
@@ -268,8 +306,22 @@ function createGuestCard(i) {
       </div>
       <div class="field-group" id="fg-docuit-${i}">
         <label>Document issue date *</label>
-        <input type="date" name="Guest ${i} - Document issue date" required>
-        <span class="error-msg">Required</span>
+        <div class="date-group">
+          <select class="doc-day" onchange="updateDoc(${i})" required>
+            <option value="">Day</option>
+            ${dayOptions()}
+          </select>
+          <select class="doc-month" onchange="updateDoc(${i})" required>
+            <option value="">Month</option>
+            ${monthOptions()}
+          </select>
+          <select class="doc-year" onchange="updateDoc(${i})" required>
+            <option value="">Year</option>
+            ${docYearOptions()}
+          </select>
+        </div>
+        <input type="hidden" name="Guest ${i} - Document issue date" class="doc-value">
+        <span class="error-msg">Please select day, month and year</span>
       </div>
       <div class="field-group full" id="fg-adres-${i}">
         <label>Home address *</label>
@@ -321,8 +373,16 @@ function validateForm() {
     ['naam','geb','nat','gender','doctype','docnr','docuit','adres'].forEach(field => {
       const fg = document.getElementById(`fg-${field}-${i}`);
       if (!fg) return;
-      const input = fg.querySelector('input, select');
-      if (!input.value.trim()) { fg.classList.add('error'); valid = false; }
+      let ok;
+      if (field === 'geb') {
+        ok = !!fg.querySelector('.dob-value').value;
+      } else if (field === 'docuit') {
+        ok = !!fg.querySelector('.doc-value').value;
+      } else {
+        const input = fg.querySelector('input, select');
+        ok = !!input.value.trim();
+      }
+      if (!ok) { fg.classList.add('error'); valid = false; }
       else { fg.classList.remove('error'); }
     });
   }

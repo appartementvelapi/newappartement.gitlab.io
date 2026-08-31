@@ -304,28 +304,24 @@ function createGuestCard(i) {
         <input type="text" name="Guest ${i} - Document support number" placeholder="e.g. AAA123456">
         <p style="font-size:.7rem;color:var(--text-muted);margin-top:.3rem">Only required if your document is a Spanish DNI/NIF or NIE. Also called <em>número de soporte</em> or <em>IDESP</em>. Found on the back of your ID card. Leave blank for passports and other documents.</p>
       </div>
-      <div class="field-group" id="fg-docuit-${i}">
-        <label>Document issue date *</label>
-        <div class="date-group">
-          <select class="doc-day" onchange="updateDoc(${i})" required>
-            <option value="">Day</option>
-            ${dayOptions()}
-          </select>
-          <select class="doc-month" onchange="updateDoc(${i})" required>
-            <option value="">Month</option>
-            ${monthOptions()}
-          </select>
-          <select class="doc-year" onchange="updateDoc(${i})" required>
-            <option value="">Year</option>
-            ${docYearOptions()}
-          </select>
-        </div>
-        <input type="hidden" name="Guest ${i} - Document issue date" class="doc-value">
-        <span class="error-msg">Please select day, month and year</span>
-      </div>
       <div class="field-group full" id="fg-adres-${i}">
-        <label>Home address *</label>
-        <input type="text" name="Guest ${i} - Address" placeholder="Street, number, postcode, city, country" required>
+        <label>Street address *</label>
+        <input type="text" name="Guest ${i} - Address" placeholder="e.g. 3 Carresbrook Place" required>
+        <span class="error-msg">Required</span>
+      </div>
+      <div class="field-group" id="fg-postcode-${i}">
+        <label>Postcode *</label>
+        <input type="text" name="Guest ${i} - Postcode" placeholder="e.g. G66 3TP" required>
+        <span class="error-msg">Required</span>
+      </div>
+      <div class="field-group" id="fg-town-${i}">
+        <label>Town / City *</label>
+        <input type="text" name="Guest ${i} - Town" placeholder="e.g. Kirkintilloch" required>
+        <span class="error-msg">Required</span>
+      </div>
+      <div class="field-group full" id="fg-country-${i}">
+        <label>Country *</label>
+        <input type="text" name="Guest ${i} - Country" placeholder="e.g. United Kingdom" required>
         <span class="error-msg">Required</span>
       </div>
       <div class="field-group full" id="fg-kinship-${i}">
@@ -370,14 +366,12 @@ function validateForm() {
     } else { fg.classList.remove('error'); }
   });
   for (let i = 1; i <= numGuests; i++) {
-    ['naam','geb','nat','gender','doctype','docnr','docuit','adres'].forEach(field => {
+    ['naam','geb','nat','gender','doctype','docnr','adres','postcode','town','country'].forEach(field => {
       const fg = document.getElementById(`fg-${field}-${i}`);
       if (!fg) return;
       let ok;
       if (field === 'geb') {
         ok = !!fg.querySelector('.dob-value').value;
-      } else if (field === 'docuit') {
-        ok = !!fg.querySelector('.doc-value').value;
       } else {
         const input = fg.querySelector('input, select');
         ok = !!input.value.trim();

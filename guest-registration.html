@@ -85,8 +85,6 @@ footer{background:var(--sea-deep);color:rgba(255,255,255,.4);text-align:center;p
 
   <div class="info-box">
     <strong>Why is this required?</strong> Under Spanish law (Royal Decree 933/2021), landlords are obliged to report the identity details of all guests aged 14 and over to the Spanish authorities via SES.HOSPEDAJES within 24 hours of arrival. Please submit your details <strong>at least 48 hours before arrival</strong>. Valid documents: passport or EU identity card (driving licences are not accepted).
-    <br><br>
-    <strong>Note on booker vs. guests:</strong> The person filling in this form (the booker) is not automatically counted as a guest. If you are also staying at the apartment, please tick the box below and include your own details as Guest 1.
   </div>
 
   <form id="regForm" novalidate>
@@ -105,18 +103,6 @@ footer{background:var(--sea-deep);color:rgba(255,255,255,.4);text-align:center;p
           <input type="email" id="email" name="Lead guest e-mail" placeholder="your@email.com" required>
           <span class="error-msg">Please enter a valid e-mail address</span>
         </div>
-        <div class="field-group" id="fg-phone" style="grid-column:1/-1">
-          <label>Your phone number (including country code)</label>
-          <input type="tel" id="phone" name="Lead guest phone" placeholder="e.g. +31 6 12345678" required>
-          <span class="error-msg">Required</span>
-        </div>
-        <div class="field-group" id="fg-bookerguest" style="grid-column:1/-1">
-          <label style="display:flex;align-items:center;gap:.5rem;text-transform:none;letter-spacing:0;font-size:.88rem;color:var(--text);font-weight:400;cursor:pointer">
-            <input type="checkbox" id="bookerIsGuest" name="Booker is also a guest" value="Yes" style="width:auto;margin:0">
-            I am also one of the guests staying at the apartment
-          </label>
-          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.3rem">If ticked, please include your own details as Guest 1 below.</p>
-        </div>
         <div class="field-group" id="fg-aankomst">
           <label>Arrival date</label>
           <input type="date" id="aankomst" name="Arrival date" required>
@@ -131,6 +117,7 @@ footer{background:var(--sea-deep);color:rgba(255,255,255,.4);text-align:center;p
           <label>Expected arrival time at the apartment *</label>
           <select id="aankomsttijd" name="Expected arrival time at the apartment" required>
             <option value="">Select a time...</option>
+            <option>15:00 – 16:00</option>
             <option>16:00 – 17:00</option>
             <option>17:00 – 18:00</option>
             <option>18:00 – 19:00</option>
@@ -140,8 +127,8 @@ footer{background:var(--sea-deep);color:rgba(255,255,255,.4);text-align:center;p
             <option>After 22:00 (please contact us)</option>
           </select>
           <span class="error-msg">Required</span>
-          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.3rem">Check-in is available from 16:00. <strong style="color:var(--text)">Please note: if you arrive later than indicated without notifying us in advance, additional waiting costs will be charged payable on site — €25 for the first 30 minutes, then €7.50 per 15 minutes thereafter.</strong> For arrivals outside the listed hours, please contact us at info@lacasa-alegria.com.</p>
-          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.5rem">We will pass your arrival time on to our keyholder. For any last-minute coordination on the day of arrival, you can reach the keyholder directly at <strong style="color:var(--sea-deep)"><a href="tel:+34691920684" style="color:var(--sea-deep);text-decoration:none">+34 691 92 06 84</a></strong>.</p>
+          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.3rem">Check-in is available from 15:00. <strong style="color:var(--text)">Please note: if you arrive later than indicated without notifying us in advance, additional waiting costs will be charged payable on site — €25 for the first 30 minutes, then €7.50 per 15 minutes thereafter.</strong> For arrivals outside the listed hours, please contact us at info@lacasa-alegria.com.</p>
+          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.5rem">We will pass your arrival time on to our keyholder. For any last-minute coordination on the day of arrival, you can reach the keyholder directly at <strong style="color:var(--sea-deep)"><a href="tel:+32485309826" style="color:var(--sea-deep);text-decoration:none">+32 485 30 98 26</a></strong>.</p>
         </div>
       </div>
     </div>
@@ -172,7 +159,7 @@ footer{background:var(--sea-deep);color:rgba(255,255,255,.4);text-align:center;p
   <div class="success-box" id="successBox">
     <div class="success-icon">✓</div>
     <div class="success-title">Details received</div>
-    <p class="success-desc">Thank you! We have received the details of your travel party and will take care of the mandatory registration with SES.HOSPEDAJES.<br><br>We will inform our keyholder of your expected arrival time. Should you need to reach them for any last-minute coordination on the day of arrival, you can contact them directly at <strong><a href="tel:+34691920684" style="color:var(--sea-deep)">+34 691 92 06 84</a></strong>.<br><br>We look forward to welcoming you in Los Alcázares!</p>
+    <p class="success-desc">Thank you! We have received the details of your travel party and will take care of the mandatory registration with SES.HOSPEDAJES.<br><br>We will inform our keyholder of your expected arrival time. Should you need to reach them for any last-minute coordination on the day of arrival, you can contact them directly at <strong><a href="tel:+32485309826" style="color:var(--sea-deep)">+32 485 30 98 26</a></strong>.<br><br>We look forward to welcoming you in Los Alcázares!</p>
   </div>
 
 </div>
@@ -234,25 +221,12 @@ function createGuestCard(i) {
         <input type="text" name="Guest ${i} - Nationality" placeholder="e.g. Dutch" required>
         <span class="error-msg">Required</span>
       </div>
-      <div class="field-group" id="fg-gender-${i}">
-        <label>Gender *</label>
-        <select name="Guest ${i} - Gender" required>
-          <option value="">Select...</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Other">Other</option>
-        </select>
-        <span class="error-msg">Required</span>
-      </div>
       <div class="field-group" id="fg-doctype-${i}">
         <label>Document type *</label>
         <select name="Guest ${i} - Document type" required>
           <option value="">Select...</option>
           <option value="Passport">Passport</option>
-          <option value="NIF (Spain)">NIF (Spain)</option>
-          <option value="NIE (foreign residents in Spain)">NIE (foreign residents in Spain)</option>
           <option value="EU identity card">EU identity card</option>
-          <option value="Other foreign document">Other foreign document</option>
         </select>
         <span class="error-msg">Required</span>
       </div>
@@ -260,11 +234,6 @@ function createGuestCard(i) {
         <label>Document number *</label>
         <input type="text" name="Guest ${i} - Document number" placeholder="e.g. AB1234567" required>
         <span class="error-msg">Required</span>
-      </div>
-      <div class="field-group" id="fg-docsupport-${i}">
-        <label>Document support number (Spanish DNI/NIE only)</label>
-        <input type="text" name="Guest ${i} - Document support number" placeholder="e.g. AAA123456">
-        <p style="font-size:.7rem;color:var(--text-muted);margin-top:.3rem">Only required if your document is a Spanish DNI/NIF or NIE. Also called <em>número de soporte</em> or <em>IDESP</em>. Found on the back of your ID card. Leave blank for passports and other documents.</p>
       </div>
       <div class="field-group" id="fg-docuit-${i}">
         <label>Document issue date *</label>
@@ -275,23 +244,6 @@ function createGuestCard(i) {
         <label>Home address *</label>
         <input type="text" name="Guest ${i} - Address" placeholder="Street, number, postcode, city, country" required>
         <span class="error-msg">Required</span>
-      </div>
-      <div class="field-group full" id="fg-kinship-${i}">
-        <label>Relationship to another guest</label>
-        <select name="Guest ${i} - Kinship">
-          <option value="">Not applicable</option>
-          <option value="Spouse">Spouse</option>
-          <option value="Partner">Partner</option>
-          <option value="Child">Child</option>
-          <option value="Parent">Parent</option>
-          <option value="Sibling">Sibling (brother/sister)</option>
-          <option value="Grandparent">Grandparent</option>
-          <option value="Grandchild">Grandchild</option>
-          <option value="Guardian">Guardian</option>
-          <option value="Other family">Other family</option>
-          <option value="Other">Other</option>
-        </select>
-        <p style="font-size:.7rem;color:var(--text-muted);margin-top:.3rem">Required for minors travelling with a parent or guardian. Optional for adults — please indicate if you are travelling as a couple or family.</p>
       </div>
     </div>
   `;
@@ -310,15 +262,15 @@ function updatePreviews() {
 
 function validateForm() {
   let valid = true;
-  ['fg-ref','fg-email','fg-phone','fg-aankomst','fg-vertrek','fg-aankomsttijd'].forEach(id => {
+  ['fg-ref','fg-email','fg-aankomst','fg-vertrek','fg-aankomsttijd'].forEach(id => {
     const fg = document.getElementById(id);
-    const input = fg.querySelector('input');
+    const input = fg.querySelector('input, select');
     if (!input.value.trim() || (input.type === 'email' && !input.validity.valid)) {
       fg.classList.add('error'); valid = false;
     } else { fg.classList.remove('error'); }
   });
   for (let i = 1; i <= numGuests; i++) {
-    ['naam','geb','nat','gender','doctype','docnr','docuit','adres'].forEach(field => {
+    ['naam','geb','nat','doctype','docnr','docuit','adres'].forEach(field => {
       const fg = document.getElementById(`fg-${field}-${i}`);
       if (!fg) return;
       const input = fg.querySelector('input, select');
@@ -329,18 +281,20 @@ function validateForm() {
   return valid;
 }
 
+const ERROR_MSG = 'Something went wrong while submitting the form. Please try again later. If the problem persists, please let us know via your booking platform or by e-mail at info@lacasa-alegria.com so we can resolve it as soon as possible — submitting these details is a legal requirement under Spanish law.';
+
 document.getElementById('regForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  if (!validateForm()) {
-    document.querySelector('.field-group.error')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
   const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  btn.textContent = 'Sending...';
-  const formData = new FormData(this);
-  formData.append('Number of guests', numGuests);
   try {
+    if (!validateForm()) {
+      document.querySelector('.field-group.error')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    const formData = new FormData(this);
+    formData.append('Number of guests', numGuests);
     const response = await fetch(FORMSPREE_ENDPOINT, {
       method: 'POST', body: formData, headers: { 'Accept': 'application/json' }
     });
@@ -351,13 +305,19 @@ document.getElementById('regForm').addEventListener('submit', async function(e) 
     } else {
       btn.disabled = false;
       btn.textContent = 'Submit details →';
-      alert('Something went wrong. Please try again or contact us at info@lacasa-alegria.com');
+      alert(ERROR_MSG);
     }
-  } catch {
+  } catch (err) {
+    console.error('Guest registration submit error:', err);
     btn.disabled = false;
     btn.textContent = 'Submit details →';
-    alert('Something went wrong. Please check your internet connection and try again.');
+    alert(ERROR_MSG);
   }
+});
+
+// Catch-all voor onverwachte JS-fouten op deze pagina
+window.addEventListener('error', function(e) {
+  console.error('Unexpected error on guest registration page:', e.error || e.message);
 });
 
 renderGuests();

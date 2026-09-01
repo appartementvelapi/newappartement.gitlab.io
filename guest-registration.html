@@ -80,13 +80,15 @@ footer{background:var(--sea-deep);color:rgba(255,255,255,.4);text-align:center;p
 <div class="hero">
   <p class="hero-label">La Casa Alegría · Los Alcázares</p>
   <h1 class="hero-title">Guest Registration <em>SES.HOSPEDAJES</em></h1>
-  <p class="hero-desc">Please fill in the details below for all guests aged 14 and over. This is a legal requirement under Spanish law.</p>
+  <p class="hero-desc">Please fill in the details below for everyone staying at the apartment, including children. This is a legal requirement under Spanish law.</p>
 </div>
 
 <div class="main">
 
   <div class="info-box">
-    <strong>Why is this required?</strong> Under Spanish law (Royal Decree 933/2021), landlords are obliged to report the identity details of all guests aged 14 and over to the Spanish authorities via SES.HOSPEDAJES within 24 hours of arrival. Please submit your details <strong>at least 48 hours before arrival</strong>. Valid documents: passport or EU identity card (driving licences are not accepted).
+    <strong>Why is this required?</strong> Under Spanish law (Royal Decree 933/2021), landlords are obliged to report the identity details of everyone staying at the apartment to the Spanish authorities via SES.HOSPEDAJES within 24 hours of arrival. Please submit your details <strong>at least 48 hours before arrival</strong>. Valid documents: passport or EU identity card (driving licences are not accepted).
+    <br><br>
+    <strong>Children under 14:</strong> must also be registered, but require fewer details — no identity document is needed. Please add them in the separate section further down.
     <br><br>
     <strong>Note on booker vs. guests:</strong> The person filling in this form (the booker) is not automatically counted as a guest. If you are also staying at the apartment, please tick the box below and include your own details as Guest 1.
   </div>
@@ -162,6 +164,19 @@ footer{background:var(--sea-deep);color:rgba(255,255,255,.4);text-align:center;p
     <!-- GUEST CARDS -->
     <div class="guests-container" id="guestsContainer"></div>
 
+    <!-- CHILDREN UNDER 14 -->
+    <div class="booking-header" style="margin-top:2.5rem">
+      <div class="booking-title">Children under 14</div>
+      <div class="guests-counter">
+        <button type="button" class="counter-btn" onclick="changeChildren(-1)">−</button>
+        <span class="counter-val" id="childCount">0</span>
+        <button type="button" class="counter-btn" onclick="changeChildren(1)">+</button>
+        <span>children</span>
+      </div>
+    </div>
+    <p style="font-size:.8rem;color:var(--text-muted);margin:-.5rem 0 1rem;line-height:1.5">Children under 14 must also be registered under Spanish law, but require fewer details — no identity document is needed. Please indicate which adult they are travelling with. The apartment has a total maximum of 6 guests (adults and children combined).</p>
+    <div class="guests-container" id="childrenContainer"></div>
+
     <!-- SUBMIT -->
     <div class="submit-section">
       <button type="submit" class="btn-submit" id="submitBtn">Submit details →</button>
@@ -192,11 +207,14 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xkoygyqa';
 // ─────────────────────────────────────────────────────────────────────────────
 
 let numGuests = 1;
+let numChildren = 0;
+const MAX_TOTAL = 6;
 
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 function dayOptions(){let s='';for(let d=1;d<=31;d++)s+=`<option value="${String(d).padStart(2,'0')}">${d}</option>`;return s;}
 function monthOptions(){return MONTHS.map((m,i)=>`<option value="${String(i+1).padStart(2,'0')}">${m}</option>`).join('');}
 function dobYearOptions(){const now=new Date().getFullYear();let s='';for(let y=now-14;y>=now-110;y--)s+=`<option value="${y}">${y}</option>`;return s;}
+function childDobYearOptions(){const now=new Date().getFullYear();let s='';for(let y=now;y>=now-14;y--)s+=`<option value="${y}">${y}</option>`;return s;}
 function docYearOptions(){const now=new Date().getFullYear();let s='';for(let y=now;y>=now-40;y--)s+=`<option value="${y}">${y}</option>`;return s;}
 
 function updateDob(i){
@@ -215,10 +233,27 @@ function updateDoc(i){
   card.querySelector('.doc-value').value=(d&&m&&y)?`${y}-${m}-${d}`:'';
 }
 
+function updateChildDob(i){
+  const card=document.getElementById(`child-card-${i}`);
+  const d=card.querySelector('.dob-day').value;
+  const m=card.querySelector('.dob-month').value;
+  const y=card.querySelector('.dob-year').value;
+  card.querySelector('.dob-value').value=(d&&m&&y)?`${y}-${m}-${d}`:'';
+}
+
 function changeGuests(delta) {
-  numGuests = Math.max(1, Math.min(6, numGuests + delta));
+  const maxAdults = MAX_TOTAL - numChildren;
+  numGuests = Math.max(1, Math.min(maxAdults, numGuests + delta));
   document.getElementById('guestCount').textContent = numGuests;
   renderGuests();
+  refreshAdultDropdowns();
+}
+
+function changeChildren(delta) {
+  const maxChildren = MAX_TOTAL - numGuests;
+  numChildren = Math.max(0, Math.min(maxChildren, numChildren + delta));
+  document.getElementById('childCount').textContent = numChildren;
+  renderChildren();
 }
 
 function renderGuests() {
@@ -245,7 +280,7 @@ function createGuestCard(i) {
       <div class="field-group full" id="fg-naam-${i}">
         <label>Full name *</label>
         <input type="text" name="Guest ${i} - Full name" placeholder="First name Last name" required
-          oninput="updatePreview(${i})">
+          oninput="updatePreview(${i}); refreshAdultDropdowns()">
         <span class="error-msg">Required</span>
       </div>
       <div class="field-group" id="fg-geb-${i}">
@@ -339,7 +374,7 @@ function createGuestCard(i) {
           <option value="Other family">Other family</option>
           <option value="Other">Other</option>
         </select>
-        <p style="font-size:.7rem;color:var(--text-muted);margin-top:.3rem">Required for minors travelling with a parent or guardian. Optional for adults — please indicate if you are travelling as a couple or family.</p>
+        <p style="font-size:.7rem;color:var(--text-muted);margin-top:.3rem">Optional — please indicate if you are travelling as a couple or family. (Children under 14 are added separately below.)</p>
       </div>
     </div>
   `;
@@ -354,6 +389,128 @@ function updatePreview(i) {
 
 function updatePreviews() {
   for (let i = 1; i <= numGuests; i++) updatePreview(i);
+}
+
+function updateChildPreview(i) {
+  const nameInput = document.querySelector(`#child-card-${i} input[type="text"]`);
+  const preview = document.getElementById(`cpreview-${i}`);
+  if (preview) preview.textContent = nameInput?.value.trim() || 'Please fill in details';
+}
+
+function renderChildren() {
+  const container = document.getElementById('childrenContainer');
+  while (container.children.length < numChildren) {
+    container.appendChild(createChildCard(container.children.length + 1));
+  }
+  while (container.children.length > numChildren) {
+    container.removeChild(container.lastChild);
+  }
+  refreshAdultDropdowns();
+}
+
+function createChildCard(i) {
+  const card = document.createElement('div');
+  card.className = 'guest-card';
+  card.id = `child-card-${i}`;
+  card.innerHTML = `
+    <div class="guest-card-header">
+      <span class="guest-nr">Child ${i}</span>
+      <span class="guest-name-preview" id="cpreview-${i}">Please fill in details</span>
+    </div>
+    <div class="guest-card-body">
+      <div class="field-group full" id="fg-cname-${i}">
+        <label>Full name *</label>
+        <input type="text" name="Child ${i} - Full name" placeholder="First name Last name" required
+          oninput="updateChildPreview(${i})">
+        <span class="error-msg">Required</span>
+      </div>
+      <div class="field-group" id="fg-cgeb-${i}">
+        <label>Date of birth *</label>
+        <div class="date-group">
+          <select class="dob-day" onchange="updateChildDob(${i})" required>
+            <option value="">Day</option>
+            ${dayOptions()}
+          </select>
+          <select class="dob-month" onchange="updateChildDob(${i})" required>
+            <option value="">Month</option>
+            ${monthOptions()}
+          </select>
+          <select class="dob-year" onchange="updateChildDob(${i})" required>
+            <option value="">Year</option>
+            ${childDobYearOptions()}
+          </select>
+        </div>
+        <input type="hidden" name="Child ${i} - Date of birth" class="dob-value">
+        <span class="error-msg">Please select day, month and year</span>
+      </div>
+      <div class="field-group" id="fg-cgender-${i}">
+        <label>Gender *</label>
+        <select name="Child ${i} - Gender" required>
+          <option value="">Select...</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <span class="error-msg">Required</span>
+      </div>
+      <div class="field-group full" id="fg-cnat-${i}">
+        <label>Nationality *</label>
+        <input type="text" name="Child ${i} - Nationality" placeholder="e.g. Dutch" required>
+        <span class="error-msg">Required</span>
+      </div>
+      <div class="field-group" id="fg-ckinship-${i}">
+        <label>Relationship *</label>
+        <select name="Child ${i} - Relationship to adult" class="child-kinship" required>
+          <option value="">Select...</option>
+          <option value="Son/Daughter">Son / Daughter</option>
+          <option value="Grandchild">Grandchild</option>
+          <option value="Niece/Nephew">Niece / Nephew</option>
+          <option value="Sibling">Sibling (brother/sister)</option>
+          <option value="Ward">Ward</option>
+          <option value="Other">Other</option>
+        </select>
+        <span class="error-msg">Required</span>
+      </div>
+      <div class="field-group" id="fg-cadult-${i}">
+        <label>Travelling with *</label>
+        <select name="Child ${i} - Accompanying adult" class="child-adult-select" required>
+          <option value="">Select an adult...</option>
+        </select>
+        <span class="error-msg">Required</span>
+      </div>
+    </div>
+  `;
+  return card;
+}
+
+function refreshAdultDropdowns() {
+  // Collect current adult names
+  const adultNames = [];
+  for (let i = 1; i <= numGuests; i++) {
+    const input = document.querySelector(`#guest-card-${i} input[name="Guest ${i} - Full name"]`);
+    const name = (input?.value || '').trim();
+    adultNames.push({ index: i, name: name });
+  }
+  // Update every child dropdown, preserving current selection if still valid
+  document.querySelectorAll('.child-adult-select').forEach(sel => {
+    const current = sel.value;
+    let html = '<option value="">Select an adult...</option>';
+    adultNames.forEach(a => {
+      const label = a.name ? `Guest ${a.index}: ${a.name}` : `Guest ${a.index} (name not yet entered)`;
+      const val = a.name ? `Guest ${a.index}: ${a.name}` : `Guest ${a.index}`;
+      html += `<option value="${val.replace(/"/g,'&quot;')}">${label.replace(/</g,'&lt;')}</option>`;
+    });
+    sel.innerHTML = html;
+    // Try to restore by matching on the "Guest N:" prefix
+    if (current) {
+      const match = current.match(/^Guest (\d+)/);
+      if (match) {
+        const idx = parseInt(match[1], 10);
+        const found = Array.from(sel.options).find(o => o.value.startsWith(`Guest ${idx}`));
+        if (found) sel.value = found.value;
+      }
+    }
+  });
 }
 
 function validateForm() {
@@ -380,6 +537,40 @@ function validateForm() {
       else { fg.classList.remove('error'); }
     });
   }
+  for (let i = 1; i <= numChildren; i++) {
+    ['cname','cgeb','cnat','cgender','ckinship','cadult'].forEach(field => {
+      const fg = document.getElementById(`fg-${field}-${i}`);
+      if (!fg) return;
+      let ok;
+      if (field === 'cgeb') {
+        ok = !!fg.querySelector('.dob-value').value;
+      } else {
+        const input = fg.querySelector('input, select');
+        ok = !!input.value.trim();
+      }
+      if (!ok) { fg.classList.add('error'); valid = false; }
+      else { fg.classList.remove('error'); }
+    });
+    // Age check: must actually be under 14
+    const dob = document.querySelector(`#child-card-${i} .dob-value`)?.value;
+    if (dob) {
+      const birth = new Date(dob);
+      const now = new Date();
+      let age = now.getFullYear() - birth.getFullYear();
+      const m = now.getMonth() - birth.getMonth();
+      if (m < 0 || (m === 0 && now.getDate() < birth.getDate())) age--;
+      if (age >= 14) {
+        const fg = document.getElementById(`fg-cgeb-${i}`);
+        fg.classList.add('error');
+        const msg = fg.querySelector('.error-msg');
+        if (msg) msg.textContent = 'This child is 14 or older — please add them to the Guests section above instead.';
+        valid = false;
+      } else {
+        const msg = document.querySelector(`#fg-cgeb-${i} .error-msg`);
+        if (msg) msg.textContent = 'Please select day, month and year';
+      }
+    }
+  }
   return valid;
 }
 
@@ -396,7 +587,9 @@ document.getElementById('regForm').addEventListener('submit', async function(e) 
     btn.disabled = true;
     btn.textContent = 'Sending...';
     const formData = new FormData(this);
-    formData.append('Number of guests', numGuests);
+    formData.append('Number of guests (14 and over)', numGuests);
+    formData.append('Number of children (under 14)', numChildren);
+    formData.append('Total occupancy', numGuests + numChildren);
     const response = await fetch(FORMSPREE_ENDPOINT, {
       method: 'POST', body: formData, headers: { 'Accept': 'application/json' }
     });
@@ -423,6 +616,7 @@ window.addEventListener('error', function(e) {
 });
 
 renderGuests();
+renderChildren();
 </script>
 </body>
 </html>
